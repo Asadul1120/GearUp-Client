@@ -1,34 +1,26 @@
 import Link from "next/link";
 import { UserIcon } from "lucide-react";
+import { IUser } from "@/types/user";
 
-
-type IUser = {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  profileImage: string;
-  address: string;
-  role: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  gears: [];
-  rentals: [];
-  reviews: [];
+interface UserMenuProps {
+  user: IUser | null;
 }
 
-const UserMenu = ( user: IUser ) => {
-   console.log(user);
+const UserMenu = ({ user }: UserMenuProps) => {
   return (
     <div className="hidden items-center gap-4 lg:flex">
- { user ? (
-        <Link href="/account" className="text-[15px] font-medium text-gray-700 hover:text-blue-600">
+      {user ? (
+        <Link
+          href="/account"
+          className="text-[15px] font-medium text-gray-700 hover:text-blue-600"
+        >
           <UserIcon size={20} />
         </Link>
-
       ) : (
-        <Link href="/login" className="text-[15px] font-medium text-gray-700 hover:text-blue-600">
+        <Link
+          href="/login"
+          className="text-[15px] font-medium text-gray-700 hover:text-blue-600"
+        >
           Sign In
         </Link>
       )}
