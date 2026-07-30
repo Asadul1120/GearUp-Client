@@ -86,6 +86,7 @@ const MobileMenu = () => {
           <div className="mt-8 flex flex-col gap-3">
 
             <Link
+              onClick={() => setOpen(false)}
               href="/login"
               className="rounded-lg border py-3 text-center font-medium"
             >
@@ -93,6 +94,7 @@ const MobileMenu = () => {
             </Link>
 
             <Link
+              onClick={() => setOpen(false)}
               href="/register"
               className="rounded-lg bg-blue-600 py-3 text-center font-medium text-white"
             >
