@@ -2,13 +2,44 @@
 
 import Link from "next/link";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { registerAction } from "../_actions/registerAction";
+import { IActionState } from "@/types/action";
+
+const initialState: IActionState = {
+  success: false,
+  statusCode: 0,
+  message: "",
+};
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const router = useRouter();
+
+  const [state, formAction, pending] = useActionState(
+    registerAction,
+    initialState,
+  );
+
+  useEffect(() => {
+    if (!state.message) return;
+
+    if (state.success) {
+      toast.success(state.message);
+
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
+    } else {
+      toast.error(state.message);
+    }
+  }, [state, router]);
+
   return (
-    <form className="space-y-5">
+    <form action={formAction} className="space-y-5">
       {/* Name */}
       <div>
         <label
@@ -108,7 +139,7 @@ const RegisterForm = () => {
 
           <button
             type="button"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowPassword((prev) => !prev)}
             className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-600"
           >
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -135,15 +166,14 @@ const RegisterForm = () => {
         </span>
       </label>
 
-      {/* Submit */}
       <button
         type="submit"
-        className="flex h-12 w-full items-center justify-center rounded-xl bg-blue-600 font-semibold text-white transition hover:bg-blue-700"
+        disabled={pending}
+        className="flex h-12 w-full items-center justify-center rounded-xl bg-blue-600 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Create Account
+        {pending ? "Creating Account..." : "Create Account"}
       </button>
 
-      {/* Login */}
       <p className="text-center text-sm text-gray-600">
         Already have an account?{" "}
         <Link
