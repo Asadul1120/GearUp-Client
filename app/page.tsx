@@ -3,7 +3,7 @@ import Navbar from "./_components/navbar/Navbar";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main>
       <Navbar />
 
       <Hero />

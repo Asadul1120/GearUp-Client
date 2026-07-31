@@ -36,7 +36,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
   }, []);
 
   return (
-    <div className="hidden lg:flex">
+    <div className="hidden  lg:flex">
       {user ? (
         <div className="relative" ref={menuRef}>
           <button

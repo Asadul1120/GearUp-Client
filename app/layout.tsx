@@ -34,7 +34,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen bg-slate-50 font-sans antialiased">
+      <body className="min-h-screen overflow-x-hidden bg-slate-50">
         {children}
 
         <Toaster
