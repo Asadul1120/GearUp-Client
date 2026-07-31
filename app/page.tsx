@@ -1,14 +1,11 @@
 import Hero from "@/app/_components/hero/Hero";
 import Navbar from "./_components/navbar/Navbar";
 
-export default async function HomePage() {
-//  if(true) {
-//   throw new Error("Something went wrong");
-//  }
-
+export default function HomePage() {
   return (
-    <main>
+    <main className="min-h-screen bg-slate-50">
       <Navbar />
+
       <Hero />
     </main>
   );

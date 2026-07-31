@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "sonner";
+
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,9 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GearUp",
+  title: {
+    default: "GearUp",
+    template: "%s | GearUp",
+  },
   description:
-    "Find quality sports and outdoor equipment for your next adventure.",
+    "Rent quality sports and outdoor equipment for your next adventure.",
 };
 
 export default function RootLayout({
@@ -27,11 +31,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body>
+      <body className="min-h-screen bg-slate-50 font-sans antialiased">
         {children}
-        <Toaster richColors position="top-right" />
+
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+        />
       </body>
     </html>
   );
