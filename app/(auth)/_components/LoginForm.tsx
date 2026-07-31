@@ -23,11 +23,11 @@ const LoginForm = () => {
       toast.success(state.message);
 
       if (role === "ADMIN") {
-        router.push("/admin-route");
+        router.push("/admin");
       } else if (role === "COSTUMER") {
-        router.push("/costumer-route");
+        router.push("/costumer");
       } else if (role === "POVIDER") {
-        router.push("/provider-route");
+        router.push("/provider");
       } else {
         router.push("/");
       }
