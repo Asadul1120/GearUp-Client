@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import {
   Dumbbell,
   Home,
   LayoutDashboard,
+  ListOrdered,
   LogOut,
+  Package,
+  PlusCircle,
   X,
 } from "lucide-react";
 
@@ -23,7 +27,15 @@ const ProviderSidebar = ({
 }: ProviderSidebarProps) => {
   const pathname = usePathname();
 
+  // Check which menu is currently active
   const dashboardActive = pathname === "/provider";
+
+  const myGearActive =
+    pathname === "/provider/gear" || pathname.includes("/edit");
+
+  const addGearActive = pathname === "/provider/gear/new";
+
+  const ordersActive = pathname === "/provider/orders";
 
   return (
     <aside className="flex h-full w-full flex-col bg-white">
@@ -39,80 +51,107 @@ const ProviderSidebar = ({
           </div>
 
           <div>
-            <h2 className="text-lg font-bold text-gray-900">
-              GearUp
-            </h2>
+            <h2 className="text-lg font-bold text-gray-900">GearUp</h2>
 
-            <p className="text-xs text-gray-500">
-              Provider Panel
-            </p>
+            <p className="text-xs text-gray-500">Provider Panel</p>
           </div>
         </Link>
 
-        {/* Only mobile sidebar shows this button */}
+        {/* This button only appears on mobile */}
         {showCloseButton && (
           <button
             type="button"
             onClick={closeSidebar}
-            aria-label="Close menu"
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-100 hover:text-gray-900"
+            aria-label="Close sidebar"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100"
           >
             <X size={22} />
           </button>
         )}
       </div>
 
-      {/* Menu section */}
-      <nav className="flex-1 p-4">
+      {/* Navigation menu */}
+      <nav className="flex-1 overflow-y-auto p-4">
         <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
           Main Menu
         </p>
 
+        {/* Dashboard link */}
         <Link
           href="/provider"
           onClick={closeSidebar}
-          className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
+          className={`mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
             dashboardActive
-              ? "bg-blue-600 text-white shadow-sm"
+              ? "bg-blue-600 text-white"
               : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
           }`}
         >
           <LayoutDashboard size={20} />
-
           Dashboard
         </Link>
 
-        <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50 p-4">
-          <p className="text-sm font-semibold text-blue-700">
-            Provider Features
-          </p>
+        {/* My Gear link */}
+        <Link
+          href="/provider/gear"
+          onClick={closeSidebar}
+          className={`mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
+            myGearActive
+              ? "bg-blue-600 text-white"
+              : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+          }`}
+        >
+          <Package size={20} />
+          My Gear
+        </Link>
 
-          <p className="mt-1 text-xs leading-5 text-blue-600">
-            Gear management and rental orders will be added
-            step by step.
-          </p>
-        </div>
+        {/* Add Gear link */}
+        <Link
+          href="/provider/gear/new"
+          onClick={closeSidebar}
+          className={`mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
+            addGearActive
+              ? "bg-blue-600 text-white"
+              : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+          }`}
+        >
+          <PlusCircle size={20} />
+          Add Gear
+        </Link>
+
+        {/* Rental Orders link */}
+        <Link
+          href="/provider/orders"
+          onClick={closeSidebar}
+          className={`mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
+            ordersActive
+              ? "bg-blue-600 text-white"
+              : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+          }`}
+        >
+          <ListOrdered size={20} />
+          Rental Orders
+        </Link>
       </nav>
 
       {/* Bottom section */}
       <div className="border-t border-gray-200 p-4">
+        {/* Home link */}
         <Link
           href="/"
           onClick={closeSidebar}
-          className="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100"
+          className="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-gray-600 hover:bg-gray-100"
         >
           <Home size={19} />
-
           Back to Home
         </Link>
 
+        {/* Logout button */}
         <form action={logoutAction}>
           <button
             type="submit"
-            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-red-600 transition hover:bg-red-50"
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-red-600 hover:bg-red-50"
           >
             <LogOut size={19} />
-
             Logout
           </button>
         </form>

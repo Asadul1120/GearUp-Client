@@ -1,17 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import {
-  MoreVertical,
-  Eye,
-  Ban,
-  CheckCircle2,
-  Trash2,
-} from "lucide-react";
+import { MoreVertical, Eye, Ban, CheckCircle2, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-import { updateUserStatusAction } from "@/app/(dashboard)/_actions/updateUserStatusAction";
-import { deleteUserAction } from "@/app/(dashboard)/_actions/deleteUserAction";
+import { updateUserStatusAction } from "@/app/(admin-dashboard)/_actions/updateUserStatusAction";
+import { deleteUserAction } from "@/app/(admin-dashboard)/_actions/deleteUserAction";
 
 interface UserActionMenuProps {
   userId: string;
@@ -25,9 +19,7 @@ export default function UserActionMenu({
   const [open, setOpen] = useState(false);
 
   // Update user status
-  const handleStatus = async (
-    status: "ACTIVE" | "SUSPENDED"
-  ) => {
+  const handleStatus = async (status: "ACTIVE" | "SUSPENDED") => {
     const result = await updateUserStatusAction(userId, status);
 
     if (result.success) {
@@ -41,9 +33,7 @@ export default function UserActionMenu({
 
   // Delete user
   const handleDelete = async () => {
-    const confirmDelete = confirm(
-      "Are you sure you want to delete this user?"
-    );
+    const confirmDelete = confirm("Are you sure you want to delete this user?");
 
     if (!confirmDelete) return;
 
@@ -60,7 +50,6 @@ export default function UserActionMenu({
 
   return (
     <div className="relative inline-block">
-
       {/* Menu Button */}
 
       <button
@@ -74,7 +63,6 @@ export default function UserActionMenu({
 
       {open && (
         <div className="absolute right-0 z-50 mt-2 w-52 rounded-xl border bg-white py-2 shadow-lg">
-
           {/* View */}
 
           <button

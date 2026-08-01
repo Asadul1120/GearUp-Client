@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import DashboardHeader from "@/app/(dashboard)/_components/DashboardHeader";
-import DashboardSidebar from "@/app/(dashboard)/_components/DashboardSidebar";
-import MobileSidebar from "@/app/(dashboard)/_components/MobileSidebar";
+import DashboardHeader from "@/app/(admin-dashboard)/_components/DashboardHeader";
+import DashboardSidebar from "@/app/(admin-dashboard)/_components/DashboardSidebar";
+import MobileSidebar from "@/app/(admin-dashboard)/_components/MobileSidebar";
 
 export default function DashboardLayout({
   children,
@@ -11,8 +11,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
-
- 
 
   return (
     <div className="flex min-h-screen bg-slate-100">
