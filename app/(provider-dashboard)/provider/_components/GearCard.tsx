@@ -1,7 +1,7 @@
 import Link from "next/link";
-
-import { Package, Pencil, Trash2 } from "lucide-react";
-
+import { Package, Pencil } from "lucide-react";
+import DeleteGearButton from "./DeleteGearButton";
+import Image from "next/image";
 import type { Gear } from "../_types/gear.types";
 
 type GearCardProps = {
@@ -14,10 +14,13 @@ const GearCard = ({ gear }: GearCardProps) => {
       {/* Gear image */}
       <div className="flex h-48 items-center justify-center bg-gray-100">
         {gear.image ? (
-          <img
+          <Image
             src={gear.image}
             alt={gear.name}
             className="h-full w-full object-cover"
+            width={300}
+            height={200}
+            unoptimized
           />
         ) : (
           <Package size={45} className="text-gray-300" />
@@ -26,7 +29,7 @@ const GearCard = ({ gear }: GearCardProps) => {
 
       {/* Gear information */}
       <div className="p-4 sm:p-5">
-        {/* Name and availability */}
+        {/* Gear name and availability */}
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 className="text-lg font-bold text-gray-900">{gear.name}</h2>
@@ -45,7 +48,7 @@ const GearCard = ({ gear }: GearCardProps) => {
           </span>
         </div>
 
-        {/* Description */}
+        {/* Gear description */}
         <p className="mt-4 line-clamp-2 text-sm leading-6 text-gray-600">
           {gear.description}
         </p>
@@ -74,7 +77,7 @@ const GearCard = ({ gear }: GearCardProps) => {
           </p>
         </div>
 
-        {/* Action buttons */}
+        {/* Edit and Delete buttons */}
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <Link
             href={`/provider/gear/${gear.id}/edit`}
@@ -84,14 +87,7 @@ const GearCard = ({ gear }: GearCardProps) => {
             Edit
           </Link>
 
-          <button
-            type="button"
-            disabled
-            className="flex flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-red-100 px-4 py-2.5 text-sm font-semibold text-red-300"
-          >
-            <Trash2 size={17} />
-            Delete
-          </button>
+          <DeleteGearButton gearId={gear.id} gearName={gear.name} />
         </div>
       </div>
     </div>

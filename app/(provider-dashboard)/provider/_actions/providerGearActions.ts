@@ -298,3 +298,51 @@ export const updateGearAction = async (
     };
   }
 };
+
+// Delete existing gear
+export const deleteGearAction = async (gearId: string) => {
+  const cookieStore = await cookies();
+
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (!accessToken) {
+    return {
+      success: false,
+      message: "Please login first.",
+    };
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_API_URL}/api/gear/${gearId}`,
+      {
+        method: "DELETE",
+
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+
+    const result = (await response.json()) as GearResponse;
+
+    if (!response.ok || !result.success) {
+      return {
+        success: false,
+        message: result.message || "Could not delete the gear.",
+      };
+    }
+
+    revalidatePath("/provider/gear");
+
+    return {
+      success: true,
+      message: result.message || "Gear deleted successfully.",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Server connection failed. Please try again.",
+    };
+  }
+};
