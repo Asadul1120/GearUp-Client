@@ -1,4 +1,4 @@
-"use client";
+
 
 import Link from "next/link";
 import {
@@ -71,7 +71,7 @@ export default function MobileSidebar({
         <div className="flex items-center justify-between border-b p-6">
 
           <Link
-            href="/dashboard/admin"
+            href="/"
             onClick={onClose}
           >
             <div className="flex items-center gap-3">

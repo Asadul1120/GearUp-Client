@@ -12,23 +12,17 @@ export default function DashboardLayout({
 }) {
   const [open, setOpen] = useState(false);
 
+ 
+
   return (
     <div className="flex min-h-screen bg-slate-100">
       <DashboardSidebar />
-
-      <MobileSidebar
-        open={open}
-        onClose={() => setOpen(false)}
-      />
+      <MobileSidebar open={open} onClose={() => setOpen(false)} />
 
       <div className="flex flex-1 flex-col">
-        <DashboardHeader
-          onMenuClick={() => setOpen(true)}
-        />
+        <DashboardHeader onMenuClick={() => setOpen(true)} />
 
-        <main className="flex-1 p-4 md:p-6">
-          {children}
-        </main>
+        <main className="flex-1 p-4 md:p-6">{children}</main>
       </div>
     </div>
   );

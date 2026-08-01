@@ -1,0 +1,115 @@
+"use client";
+
+import { useState } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
+import {
+  Home,
+  Menu,
+  UserRound,
+} from "lucide-react";
+
+import ProviderSidebar from "./ProviderSidebar";
+
+type ProviderDashboardLayoutProps = {
+  children: ReactNode;
+};
+
+const ProviderDashboardLayout = ({
+  children,
+}: ProviderDashboardLayoutProps) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const openSidebar = () => {
+    setSidebarOpen(true);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-100">
+      {/* Desktop sidebar */}
+      <div className="fixed inset-y-0 left-0 hidden w-72 border-r border-gray-200 lg:block">
+        <ProviderSidebar />
+      </div>
+
+      {/* Mobile dark overlay */}
+      {sidebarOpen && (
+        <button
+          type="button"
+          onClick={closeSidebar}
+          aria-label="Close sidebar"
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+        />
+      )}
+
+      {/* Mobile sidebar */}
+      <div
+        className={`fixed inset-y-0 left-0 z-50 w-[280px] max-w-[85%] transform border-r border-gray-200 shadow-xl transition-transform duration-300 lg:hidden ${
+          sidebarOpen
+            ? "translate-x-0"
+            : "-translate-x-full"
+        }`}
+      >
+        <ProviderSidebar
+          showCloseButton={true}
+          closeSidebar={closeSidebar}
+        />
+      </div>
+
+      {/* Right side content */}
+      <div className="min-h-screen lg:pl-72">
+        {/* Top header */}
+        <header className="sticky top-0 z-30 border-b border-gray-200 bg-white/95 backdrop-blur">
+          <div className="flex h-16 items-center justify-between px-4 sm:px-5 lg:px-8">
+            <div className="flex items-center gap-3">
+              {/* Mobile menu button */}
+              <button
+                type="button"
+                onClick={openSidebar}
+                aria-label="Open sidebar"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-700 transition hover:bg-gray-100 lg:hidden"
+              >
+                <Menu size={22} />
+              </button>
+
+              <div>
+                <h1 className="text-base font-bold text-gray-900 sm:text-lg">
+                  Provider Dashboard
+                </h1>
+
+                <p className="hidden text-xs text-gray-500 sm:block">
+                  Manage your gear and rental activity
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Link
+                href="/"
+                className="hidden items-center gap-2 rounded-xl border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 sm:flex"
+              >
+                <Home size={17} />
+
+                Home
+              </Link>
+
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                <UserRound size={20} />
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Page content */}
+        <main className="mx-auto w-full max-w-7xl p-4 sm:p-5 lg:p-8">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default ProviderDashboardLayout;

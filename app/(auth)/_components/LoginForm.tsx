@@ -14,7 +14,7 @@ const LoginForm = () => {
   const [state, Action, pending] = useActionState(loginAction, false);
 
   const role = state.data?.user.role;
-  console.log(role);
+  
 
   useEffect(() => {
     if (!state.message) return;
@@ -24,9 +24,9 @@ const LoginForm = () => {
 
       if (role === "ADMIN") {
         router.push("/admin");
-      } else if (role === "COSTUMER") {
-        router.push("/costumer");
-      } else if (role === "POVIDER") {
+      } else if (role === "CUSTOMER") {
+        router.push("/customer");
+      } else if (role === "PROVIDER") {
         router.push("/provider");
       } else {
         router.push("/");
