@@ -1,20 +1,20 @@
 import { connection } from "next/server";
 
-import { getAdminUsers } from "../_actions/adminUserActions";
-import UserCard from "../_components/UserCard";
+import { getAdminGears } from "../_actions/adminGearActions";
+import AdminGearCard from "../_components/AdminGearCard";
 
-const AdminUsersPage = async () => {
+const AdminGearsPage = async () => {
   await connection();
 
-  const result = await getAdminUsers();
+  const result = await getAdminGears();
 
   return (
     <section>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Gear Management</h1>
 
         <p className="mt-1 text-sm text-gray-500">
-          Manage customers and providers
+          View all gears available on GearUp
         </p>
       </div>
 
@@ -27,19 +27,19 @@ const AdminUsersPage = async () => {
       {result.success && result.data.length === 0 && (
         <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-5 py-16 text-center">
           <h2 className="text-lg font-semibold text-gray-900">
-            No users found
+            No gears found
           </h2>
 
           <p className="mt-2 text-sm text-gray-500">
-            Registered users will appear here.
+            Provider gears will appear here.
           </p>
         </div>
       )}
 
       {result.data.length > 0 && (
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {result.data.map((user) => (
-            <UserCard key={user.id} user={user} />
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {result.data.map((gear) => (
+            <AdminGearCard key={gear.id} gear={gear} />
           ))}
         </div>
       )}
@@ -47,4 +47,4 @@ const AdminUsersPage = async () => {
   );
 };
 
-export default AdminUsersPage;
+export default AdminGearsPage;

@@ -1,64 +1,78 @@
+import { connection } from "next/server";
+
 import {
-  Users,
-  Dumbbell,
   Package,
-  CalendarDays,
+  Tags,
+  UserRoundCheck,
+  UserRoundX,
+  Users,
+  Warehouse,
 } from "lucide-react";
 
-import StatCard from "@/app/_components/dashboard/StatCard";
-import RecentActivity from "@/app/_components/dashboard/RecentActivity";
+import { getAdminDashboardData } from "./_actions/adminDashboardActions";
+import AdminStatCard from "./_components/AdminStatCard";
 
-export default function AdminDashboardPage() {
+const AdminDashboardPage = async () => {
+  await connection();
+
+  const result = await getAdminDashboardData();
+  const stats = result.data;
+
   return (
-    <div className="space-y-8">
-      {/* Heading */}
-      <div>
-        <h1 className="text-3xl font-bold">
-          Dashboard Overview
-        </h1>
+    <section>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
 
-        <p className="mt-2 text-gray-500">
-          Welcome back! Here's what's happening today.
+        <p className="mt-1 text-sm text-gray-500">
+          Overview of the GearUp platform
         </p>
       </div>
 
-      {/* Statistics */}
-      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard
+      {!result.success && (
+        <div className="mb-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          {result.message}
+        </div>
+      )}
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <AdminStatCard
           title="Total Users"
-          value={0}
+          value={stats.totalUsers}
           icon={Users}
-          color="bg-blue-100 text-blue-600"
         />
 
-        <StatCard
-          title="Active Gear"
-          value={0}
-          icon={Dumbbell}
-          color="bg-green-100 text-green-600"
+        <AdminStatCard
+          title="Customers"
+          value={stats.totalCustomers}
+          icon={UserRoundCheck}
         />
 
-        <StatCard
-          title="Total Rentals"
-          value={0}
+        <AdminStatCard
+          title="Providers"
+          value={stats.totalProviders}
+          icon={Warehouse}
+        />
+
+        <AdminStatCard
+          title="Suspended Users"
+          value={stats.suspendedUsers}
+          icon={UserRoundX}
+        />
+
+        <AdminStatCard
+          title="Total Gears"
+          value={stats.totalGears}
           icon={Package}
-          color="bg-purple-100 text-purple-600"
         />
 
-        <StatCard
-          title="Today's Rentals"
-          value={0}
-          icon={CalendarDays}
-          color="bg-orange-100 text-orange-600"
+        <AdminStatCard
+          title="Categories"
+          value={stats.totalCategories}
+          icon={Tags}
         />
       </div>
-
-      {/* Recent Sections */}
-      <div className="grid gap-6 lg:grid-cols-2">
-        <RecentActivity title="Recent Users" />
-
-        <RecentActivity title="Recent Rental Orders" />
-      </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default AdminDashboardPage;
