@@ -4,13 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import {
-  ClipboardList,
   Dumbbell,
   Home,
   LayoutDashboard,
   LogOut,
   Package,
-  Star,
   Tags,
   UserRoundCog,
   X,
