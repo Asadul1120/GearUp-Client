@@ -6,9 +6,11 @@ export function proxy(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
-  const isProviderRoute = pathname.startsWith("/provider");
+  const isProtectedRoute =
+    pathname.startsWith("/provider") || pathname.startsWith("/customer");
 
-  if (isProviderRoute && !accessToken) {
+  // Redirect guests
+  if (isProtectedRoute && !accessToken) {
     const loginUrl = new URL("/login", request.url);
 
     return NextResponse.redirect(loginUrl);
@@ -18,5 +20,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/provider/:path*"],
+  matcher: ["/provider/:path*", "/customer/:path*"],
 };
