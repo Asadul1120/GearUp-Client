@@ -158,7 +158,7 @@ const UserMenu = ({
 
           <div className="p-2">
             <Link
-              href="/account"
+              href="/profile"
               className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
             >
               <User size={18} />
