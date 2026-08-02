@@ -23,26 +23,24 @@ export const metadata: Metadata = {
     "Rent quality sports and outdoor equipment for your next adventure.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html
       lang="en"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen overflow-x-hidden bg-slate-50">
+      <body className="min-h-screen overflow-x-hidden bg-slate-50 font-sans text-gray-900 antialiased">
         {children}
 
-        <Toaster
-          position="top-right"
-          richColors
-          closeButton
-        />
+        <Toaster position="top-right" richColors closeButton />
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
