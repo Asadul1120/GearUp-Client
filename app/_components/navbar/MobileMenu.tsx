@@ -24,8 +24,7 @@ type MobileMenuProps = {
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Gear", href: "/gear" },
-  { name: "Categories", href: "/categories" },
+  { name: "Gears", href: "/gears" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];

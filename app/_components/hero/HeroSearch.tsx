@@ -1,32 +1,44 @@
-import { Search } from "lucide-react";
+import {
+  MapPin,
+  Search,
+} from "lucide-react";
 
 const HeroSearch = () => {
   return (
-    <div className="mt-14 w-full max-w-4xl">
-      <div className="flex flex-col gap-3 rounded-2xl border border-gray-200 bg-white p-3 shadow-xl md:flex-row md:items-center">
+    <div className="mt-9 w-full max-w-2xl">
+      <form
+        action="/gear"
+        method="get"
+        className="rounded-2xl border border-gray-200 bg-white/90 p-2 shadow-xl shadow-blue-100/60 backdrop-blur sm:p-3"
+      >
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="relative flex-1">
+            <Search
+              size={20}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+            />
 
-        {/* Search Input */}
-        <div className="relative flex-1">
-          <Search
-            size={20}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-          />
+            <input
+              type="search"
+              name="search"
+              placeholder="Search gear, brand or category..."
+              className="h-12 w-full rounded-xl border border-gray-200 bg-slate-50 pl-12 pr-4 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
+            />
+          </div>
 
-          <input
-            type="text"
-            placeholder="Search sports gear..."
-            className="h-10 w-full rounded-xl border border-gray-200 bg-gray-50 pl-12 pr-4 text-gray-700 placeholder:text-gray-400 outline-none transition-all duration-300 focus:border-blue-600 focus:bg-white"
-          />
+          <button
+            type="submit"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 text-sm font-semibold text-white transition hover:bg-blue-700 active:scale-[0.98]"
+          >
+            <Search size={18} />
+            Search Gear
+          </button>
         </div>
+      </form>
 
-        {/* Search Button */}
-        <button
-          className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-2 font-semibold text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-lg active:scale-95"
-        >
-          <Search size={18} />
-          Search
-        </button>
-
+      <div className="mt-3 flex items-center justify-center gap-2 text-xs text-gray-500 lg:justify-start">
+        <MapPin size={15} className="text-blue-600" />
+        Discover available equipment from different providers
       </div>
     </div>
   );
