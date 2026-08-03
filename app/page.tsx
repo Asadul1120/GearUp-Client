@@ -210,7 +210,7 @@ const HomePage = () => {
               </div>
 
               <Link
-                href="/gear"
+                href="/gears"
                 className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
               >
                 Explore All Gear
@@ -324,7 +324,7 @@ const HomePage = () => {
 
               <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
-                  href="/gear"
+                  href="/gears"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-600 transition hover:bg-blue-50"
                 >
                   Browse Gear

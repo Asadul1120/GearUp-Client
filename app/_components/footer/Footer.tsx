@@ -14,7 +14,7 @@ const quickLinks = [
   },
   {
     name: "Browse Gear",
-    href: "/gear",
+    href: "/gears",
   },
   {
     name: "About Us",
