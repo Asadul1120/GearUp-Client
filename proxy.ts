@@ -13,6 +13,18 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/admin") ||
     pathname.startsWith("/profile");
 
+  const isAuthRoute =
+    pathname === "/login" ||
+    pathname === "/register";
+
+  // Logged-in users cannot access login or register pages
+  if (isAuthRoute && accessToken) {
+    return NextResponse.redirect(
+      new URL("/", request.url),
+    );
+  }
+
+  // Logged-out users cannot access protected pages
   if (isProtectedRoute && !accessToken) {
     return NextResponse.redirect(
       new URL("/login", request.url),
@@ -28,5 +40,7 @@ export const config = {
     "/customer/:path*",
     "/admin/:path*",
     "/profile/:path*",
+    "/login",
+    "/register",
   ],
 };

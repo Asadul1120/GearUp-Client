@@ -16,12 +16,12 @@ const HeroSearch = () => {
     const searchText = search.trim();
 
     if (!searchText) {
-      router.push("/gear");
+      router.push("/gears");
       return;
     }
 
     router.push(
-      `/gear?search=${encodeURIComponent(searchText)}`,
+      `/gears?search=${encodeURIComponent(searchText)}`,
     );
   };
 
